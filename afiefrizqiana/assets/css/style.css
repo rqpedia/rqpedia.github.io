@@ -1,0 +1,351 @@
+/* --- 1. GLOBAL SETTINGS & VARIABLES --- */
+:root {
+    --primary: #3498db;
+    --primary-dark: #2980b9;
+    --accent-green: #25D366;
+    --white: #ffffff;
+    --transition: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+    --bg-body: #ffffff;
+    --bg-card: #f8f9fa;
+    --bg-nav: rgba(255, 255, 255, 0.8);
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --border: rgba(0, 0, 0, 0.08);
+}
+
+.dark-theme {
+    --bg-body: #121212;
+    --bg-card: #1e1e1e;
+    --bg-nav: rgba(30, 30, 30, 0.8);
+    --text-main: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    touch-action: none;
+}
+
+/* --- 2. BOTTOM NAVIGATION --- */
+nav {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-nav);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    gap: 5px;
+}
+
+.nav-link {
+    color: var(--text-main);
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-size: 1.2rem;
+    opacity: 0.5;
+}
+
+.nav-link.active {
+    opacity: 1;
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.theme-toggle-nav {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid var(--border);
+}
+
+/* --- 3. LAYOUT ENGINE --- */
+.wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition);
+    will-change: transform;
+}
+
+section {
+    height: 100vh;
+    width: 100vw;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 100px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+section::-webkit-scrollbar {
+    display: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: auto 0;
+}
+
+/* --- 4. BENTO & CARDS --- */
+.about-bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 15px;
+    width: 100%;
+}
+
+.bento-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.bento-item:hover {
+    border-color: var(--primary);
+    transform: scale(1.02);
+}
+
+.bento-main {
+    grid-column: span 2;
+    grid-row: span 2;
+    text-align: left;
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    object-fit: cover;
+}
+
+/* --- 5. SKILLS SECTION --- */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+.skill-card-modern {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card-modern:hover {
+    transform: translateY(-10px);
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.skill-card-modern:hover .skill-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.skill-card-modern:hover h3,
+.skill-card-modern:hover p {
+    color: white;
+}
+
+.skill-level {
+    height: 4px;
+    width: 40px;
+    background: var(--primary);
+    margin: 12px auto 0;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.skill-card-modern:hover .skill-level {
+    background: white;
+    width: 80px;
+}
+
+/* --- 6. CONTACT WRAPPER --- */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    background: var(--bg-card);
+    border-radius: 32px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info-panel {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 40px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-form-panel {
+    padding: 40px;
+    background: var(--bg-card);
+}
+
+.social-links-modern {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icon-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-icon-btn:hover {
+    background: white;
+    color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.input-group-modern {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group-modern input,
+.input-group-modern textarea {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    background: var(--bg-body);
+    color: var(--text-main);
+    transition: all 0.3s;
+    font-size: 16px;
+}
+
+.btn-gradient {
+    background: linear-gradient(90deg, #25D366, #128C7E);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 15px;
+    width: 100%;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.modern-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* --- 7. RESPONSIVE --- */
+@media (max-width: 768px) {
+    .about-bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bento-main {
+        grid-column: span 2;
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info-panel {
+        padding: 30px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .contact-form-panel {
+        padding: 30px 20px;
+    }
+
+    section {
+        justify-content: flex-start;
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
